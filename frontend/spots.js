@@ -289,10 +289,10 @@ function filterByArea(area, clickedButton) {
     const spotItems = document.querySelectorAll('.spot-item');
     const areaButtons = document.querySelectorAll('.area-btn');
 
-    // バグ: 前のボタンのactiveクラスを削除していない
-    // areaButtons.forEach(btn => {
-    //     btn.classList.remove('active');
-    // });
+
+     areaButtons.forEach(btn => {
+         btn.classList.remove('active');
+     });
 
     if (clickedButton) {
         clickedButton.classList.add('active');
