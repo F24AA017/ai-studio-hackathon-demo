@@ -375,11 +375,10 @@ function closeImageModal() {
     }
 }
 
- バグ: Escキーでモーダルを閉じる機能がコメントアウトされている
- document.addEventListener('keydown', (e) => {
-     if (e.key === 'Escape') {
-         closeImageModal();
-     }
- });
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeImageModal();
+    }
+});
 
 window.addEventListener('load', loadSpotDetails);
