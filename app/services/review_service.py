@@ -135,8 +135,8 @@ class ReviewService:
 
         # 画像ファイルの削除処理が抜けている（ディスク容量を圧迫）
         # 画像ファイルがあれば削除
-        # if review.get('photo_filename'):
-        #     self.file_service.delete_review_photo(review['photo_filename'])
+        if review.get('photo_filename'):
+            self.file_service.delete_review_photo(review['photo_filename'])
 
         # レビュー削除
         if self.review_repo.delete(review_id):
