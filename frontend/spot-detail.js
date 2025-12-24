@@ -375,6 +375,7 @@ function closeImageModal() {
     }
 }
 
+
  document.addEventListener('keydown', (e) => {
      if (e.key === 'Escape') {
         closeImageModal();
