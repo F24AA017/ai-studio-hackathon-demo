@@ -38,8 +38,8 @@ function displayEvents(events) {
         eventElement.dataset.area = event.area;
 
         // バグ: 日付をパースせずにそのまま表示している
-        const month = event.event_date;
-        const day = '';
+        const month = new Date(event.event_date).getMonth() + 1;
+        const day = new Date(event.event_date).getDate();
 
         // エリア名を日本語に変換
         const areaNames = {
@@ -152,7 +152,7 @@ async function searchEvents() {
         const results = await apiClient.searchEvents(keyword);
         displayEvents(results);
         // バグ: 検索結果件数が表示されない
-        // searchResultInfo.textContent = `「${keyword}」の検索結果: ${results.length}件`;
+        searchResultInfo.textContent = `「${keyword}」の検索結果: ${results.length}件`;
     } catch (error) {
         console.error('検索エラー:', error);
         searchResultInfo.textContent = '検索に失敗しました';
