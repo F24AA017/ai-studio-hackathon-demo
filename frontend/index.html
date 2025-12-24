@@ -83,13 +83,17 @@
             <h2>人気の観光スポット</h2>
             <div class="spot-grid">
                 <div class="spot-card">
-                    <div class="spot-image">草津温泉湯畑</div>
+                    <iframe width="100%" height="200"
+                        src="https://www.youtube.com/embed/GrEEoEmmrKs"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        style="display: block;"></iframe>
                     <div class="spot-content">
                         <h3>草津温泉</h3>
                         <p>日本三名泉の一つ。湯畑を中心に広がる温泉街は、昔ながらの風情を残しています。</p>
                         <a href="spots/kusatsu.html" class="spot-link">詳細を見る →</a>
 
-                        <!-- チェックイン機能 -->
                         <div class="checkin-section">
                             <label for="visit-date-kusatsu">訪問日:</label>
                             <input type="date" id="visit-date-kusatsu" class="checkin-date" />
@@ -101,13 +105,17 @@
                     </div>
                 </div>
                 <div class="spot-card">
-                    <div class="spot-image">富岡製糸場</div>
+                    <iframe width="100%" height="200"
+                        src="https://www.youtube.com/embed/OFg0mXRNDpI"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        style="display: block;"></iframe>
                     <div class="spot-content">
                         <h3>富岡製糸場</h3>
                         <p>世界遺産に登録された日本初の本格的な製糸工場。明治の産業革命遺産です。</p>
                         <a href="spots/tomioka.html" class="spot-link">詳細を見る →</a>
 
-                        <!-- チェックイン機能 -->
                         <div class="checkin-section">
                             <label for="visit-date-tomioka">訪問日:</label>
                             <input type="date" id="visit-date-tomioka" class="checkin-date" />
@@ -119,13 +127,17 @@
                     </div>
                 </div>
                 <div class="spot-card">
-                    <div class="spot-image">尾瀬ヶ原</div>
+                    <iframe width="100%" height="200"
+                        src="https://www.youtube.com/embed/o7zDfKZrlJ8"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        style="display: block;"></iframe>
                     <div class="spot-content">
                         <h3>尾瀬国立公園</h3>
                         <p>本州最大の高層湿原。ミズバショウやニッコウキスゲなど、四季折々の花が楽しめます。</p>
                         <a href="spots/oze.html" class="spot-link">詳細を見る →</a>
 
-                        <!-- チェックイン機能 -->
                         <div class="checkin-section">
                             <label for="visit-date-oze">訪問日:</label>
                             <input type="date" id="visit-date-oze" class="checkin-date" />
@@ -348,17 +360,12 @@
     <script>
         /**
          * チェックイン機能
-         * バグ: 未来の日付でもチェックインできてしまう
          */
         function checkIn(spotName, spotId) {
             const dateInput = document.getElementById(`visit-date-${spotId}`);
             const selectedDate = dateInput.value;
 
-            // 日付が選択されていないかチェックしていない
-            // 未来の日付かどうかをチェックしていない
-
             if (selectedDate) {
-                // localStorageに保存
                 const checkinData = {
                     spot: spotName,
                     date: selectedDate,
@@ -366,13 +373,8 @@
                 };
 
                 localStorage.setItem(`checkin_${spotId}`, JSON.stringify(checkinData));
-
                 alert(`${spotName}へのチェックインを記録しました！\n訪問日: ${selectedDate}`);
-
-                // 日付入力をクリア
                 dateInput.value = '';
-
-                // 表示を更新
                 updateCheckinDisplay(spotId);
             } else {
                 alert('訪問日を選択してください');
@@ -393,14 +395,13 @@
             }
         }
 
-        // ページ読み込み時に過去のチェックイン情報を表示
+        // ページ読み込み時に実行
         window.addEventListener('DOMContentLoaded', function() {
             const spots = ['kusatsu', 'tomioka', 'oze'];
             spots.forEach(spotId => {
                 updateCheckinDisplay(spotId);
             });
 
-            // 近くの観光地表示ボタンのイベントリスナー
             const showNearbyBtn = document.getElementById('show-nearby-btn');
             if (showNearbyBtn) {
                 showNearbyBtn.addEventListener('click', showNearbySpots);
@@ -409,37 +410,29 @@
 
         /**
          * 近くの観光地を表示する機能
-         * formatDistance関数がundefinedを返すため、距離が正しく表示されない
          */
         async function showNearbySpots() {
             const resultsDiv = document.getElementById('nearby-results');
-
-            // ローディング表示
             resultsDiv.innerHTML = '<div class="nearby-loading">現在地を取得中...</div>';
 
-            // Geolocation APIで現在地を取得
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
                     async function(position) {
                         const lat = position.coords.latitude;
                         const lon = position.coords.longitude;
-
-                        // ローディング表示を更新
                         resultsDiv.innerHTML = '<div class="nearby-loading">近くの観光地を検索中...</div>';
 
                         try {
-                            // API呼び出し（api-client.jsを読み込む必要がある）
                             const response = await fetch(`/api/spots/nearby?lat=${lat}&lon=${lon}`);
                             const spots = await response.json();
 
-                            // 結果を表示
                             if (spots.length === 0) {
                                 resultsDiv.innerHTML = '<div class="nearby-error">近くの観光地が見つかりませんでした</div>';
                             } else {
                                 let html = '';
                                 spots.forEach(spot => {
-                                    // formatDistance関数がundefinedを返す
-                                    const distance = formatDistance(spot.distance);
+                                    // formatDistance関数はapi-client.jsで定義されている前提
+                                    const distance = typeof formatDistance !== 'undefined' ? formatDistance(spot.distance) : spot.distance + 'm';
                                     html += `
                                         <div class="nearby-spot-item">
                                             <div class="nearby-spot-name">${spot.spot_name}</div>
@@ -465,7 +458,6 @@
         }
     </script>
 
-    <!-- api-client.jsを読み込む -->
     <script src="api-client.js"></script>
 </body>
 </html>
