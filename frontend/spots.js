@@ -166,7 +166,7 @@ function loadRanking(spots) {
 
         // 星評価の表示を作成
         // バグ: 星の計算ロジックが間違っている（Math.ceilを使うと計算がおかしくなる）
-        const fullStars = Math.ceil(spot.avg_rating);
+        const fullStars = Math.floor(spot.avg_rating);
         const hasHalfStar = spot.avg_rating % 1 >= 0.5;
         const emptyStars = 5 - fullStars;
         const starsHtml = '★'.repeat(fullStars) + (hasHalfStar ? '☆' : '') + '☆'.repeat(emptyStars);
@@ -289,10 +289,10 @@ function filterByArea(area, clickedButton) {
     const spotItems = document.querySelectorAll('.spot-item');
     const areaButtons = document.querySelectorAll('.area-btn');
 
-    // バグ: 前のボタンのactiveクラスを削除していない
-    // areaButtons.forEach(btn => {
-    //     btn.classList.remove('active');
-    // });
+
+     areaButtons.forEach(btn => {
+         btn.classList.remove('active');
+     });
 
     if (clickedButton) {
         clickedButton.classList.add('active');
