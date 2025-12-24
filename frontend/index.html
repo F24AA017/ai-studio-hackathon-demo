@@ -350,34 +350,37 @@
          * チェックイン機能
          * バグ: 未来の日付でもチェックインできてしまう
          */
-        function checkIn(spotName, spotId) {
-            const dateInput = document.getElementById(`visit-date-${spotId}`);
-            const selectedDate = dateInput.value;
+function checkIn(spotName, spotId) {
+    const dateInput = document.getElementById(`visit-date-${spotId}`);
+    const selectedDate = dateInput.value;
 
-            // 日付が選択されていないかチェックしていない
-            // 未来の日付かどうかをチェックしていない
+    if (!selectedDate) {
+        alert('訪問日を選択してください');
+        return;
+    }
 
-            if (selectedDate) {
-                // localStorageに保存
-                const checkinData = {
-                    spot: spotName,
-                    date: selectedDate,
-                    checkedAt: new Date().toISOString()
-                };
+    // 日付バリデーション（入力チェック）: 未来の日付をチェック
+    const selected = new Date(selectedDate);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);  // 時刻をリセットして日付のみで比較
 
-                localStorage.setItem(`checkin_${spotId}`, JSON.stringify(checkinData));
+    if (selected > today) {
+        alert('未来の日付は選択できません');
+        return;
+    }
 
-                alert(`${spotName}へのチェックインを記録しました！\n訪問日: ${selectedDate}`);
+    // チェックイン処理
+    const checkinData = {
+        spot: spotName,
+        date: selectedDate,
+        checkedAt: new Date().toISOString()
+    };
 
-                // 日付入力をクリア
-                dateInput.value = '';
-
-                // 表示を更新
-                updateCheckinDisplay(spotId);
-            } else {
-                alert('訪問日を選択してください');
-            }
-        }
+    localStorage.setItem(`checkin_${spotId}`, JSON.stringify(checkinData));
+    alert(`${spotName}へのチェックインを記録しました！\n訪問日: ${selectedDate}`);
+    dateInput.value = '';
+    updateCheckinDisplay(spotId);
+}
 
         /**
          * チェックイン履歴の表示を更新
