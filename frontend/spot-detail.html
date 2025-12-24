@@ -315,7 +315,7 @@
             <ul>
                 <li><a href="index.html">ホーム</a></li>
                 <li><a href="spots.html">観光スポット</a></li>
-                <li>草津温泉湯畑</li>
+                <li id="breadcrumbSpotName">草津温泉湯畑</li>
             </ul>
         </div>
     </div>
@@ -350,7 +350,7 @@
                     <tr>
                         <th>地図</th>
                         <td>
-                            <a href="https://maps.google.com/maps?q=草津温泉湯畑" target="_blank" class="google-maps-link" id="spotMapLink">
+                            <a href="https://maps.google.com/?q=草津温泉湯畑" target="_blank" class="google-maps-link" id="spotMapLink">
                                 📍 Google Mapsで見る
                             </a>
                         </td>
@@ -364,8 +364,7 @@
             <div class="description-text" id="spotDescription">
                 <p>草津温泉のシンボル「湯畑」は、毎分4,000リットルもの温泉が湧き出す、日本でも有数の自然湧出量を誇る源泉です。</p>
                 <p>湯畑の周囲には遊歩道が整備され、湯けむりと硫黄の香りに包まれながら散策を楽しめます。夜にはライトアップされ、幻想的な雰囲気に包まれます。</p>
-                <p>湯畑から採取される「湯の花」は草津温泉の特産品として人気があり、お土産としても喜ばれています。周辺には足湯や共同浴場、土産物店、飲食店が立ち並び、温泉街の風情を満喫できます。</p>
-                <p>また、湯もみショーが行われる「熱乃湯」も徒歩圏内にあり、草津温泉の伝統文化に触れることができます。</p>
+                <p>湯畑から採取される「湯の花」は草津温泉の特産品として人気があり、お土産としても喜ばれています。</p>
             </div>
         </div>
 
@@ -382,7 +381,7 @@
                     <form onsubmit="submitReview(event)">
                         <div class="form-group">
                             <label for="reviewerName">お名前</label>
-                            <input type="text" id="reviewerName" required>
+                            <input type="text" id="reviewerName" required placeholder="お名前">
                         </div>
 
                         <div class="form-group">
@@ -407,7 +406,6 @@
                         <div class="form-group">
                             <label for="reviewPhoto">写真（任意）</label>
                             <input type="file" id="reviewPhoto" accept="image/*">
-                            <small style="color: #666; display: block; margin-top: 5px;">JPG, PNG, GIF形式の画像を1枚添付できます（最大5MB）</small>
                         </div>
 
                         <button type="submit" class="submit-btn">投稿する</button>
@@ -415,7 +413,7 @@
                 </div>
             </div>
 
-            <div class="reviews-list">
+            <div class="reviews-list" id="reviewsList">
                 <div class="review-item">
                     <div class="review-header">
                         <span class="reviewer-name">山田太郎</span>
@@ -423,40 +421,7 @@
                     </div>
                     <div class="review-rating">★★★★★</div>
                     <div class="review-text">
-                        草津温泉のシンボル的存在です。湯けむりが立ち込める様子は圧巻で、硫黄の香りも温泉地らしさを感じさせてくれます。夜のライトアップも幻想的でおすすめです。
-                    </div>
-                </div>
-
-                <div class="review-item">
-                    <div class="review-header">
-                        <span class="reviewer-name">鈴木花子</span>
-                        <span class="review-date">2024年11月28日</span>
-                    </div>
-                    <div class="review-rating">★★★★☆</div>
-                    <div class="review-text">
-                        初めて訪れましたが、想像以上に迫力がありました。周辺の足湯も無料で楽しめて良かったです。ただ、週末は観光客が多くて混雑していました。
-                    </div>
-                </div>
-
-                <div class="review-item">
-                    <div class="review-header">
-                        <span class="reviewer-name">佐藤次郎</span>
-                        <span class="review-date">2024年11月20日</span>
-                    </div>
-                    <div class="review-rating">★★★★★</div>
-                    <div class="review-text">
-                        何度来ても飽きない場所です。季節によって雰囲気が変わり、特に冬の雪景色と湯けむりのコントラストは最高です。湯もみショーも見応えがありました。
-                    </div>
-                </div>
-
-                <div class="review-item">
-                    <div class="review-header">
-                        <span class="reviewer-name">田中美咲</span>
-                        <span class="review-date">2024年11月15日</span>
-                    </div>
-                    <div class="review-rating">★★★★☆</div>
-                    <div class="review-text">
-                        湯畑の周りには美味しい温泉まんじゅうのお店がたくさんあって、食べ歩きも楽しめました。湯畑自体も見応えがあり、草津温泉に来たら必見のスポットだと思います。
+                        草津温泉のシンボル的存在です。夜のライトアップも幻想的でおすすめです。
                     </div>
                 </div>
             </div>
@@ -472,31 +437,11 @@
                         <li><a href="spots.html">観光スポット</a></li>
                         <li><a href="onsen.html">温泉情報</a></li>
                         <li><a href="gourmet.html">グルメ・特産品</a></li>
-                        <li><a href="accommodation.html">宿泊施設</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>アクセス・交通</h3>
-                    <ul>
-                        <li><a href="access.html">群馬へのアクセス</a></li>
-                        <li><a href="transport.html">県内の交通機関</a></li>
-                        <li><a href="parking.html">駐車場情報</a></li>
-                        <li><a href="map.html">観光マップ</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>お役立ち情報</h3>
-                    <ul>
-                        <li><a href="weather.html">天気・気候</a></li>
-                        <li><a href="emergency.html">緊急時の連絡先</a></li>
-                        <li><a href="wifi.html">Wi-Fiスポット</a></li>
-                        <li><a href="credits.html">画像クレジット</a></li>
-                        <li><a href="contact.html">お問い合わせ</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 群馬県観光ポータル. All rights reserved.</p>
+                <p>© 2024 群馬県観光ポータル. All rights reserved.</p>
             </div>
         </div>
     </footer>
