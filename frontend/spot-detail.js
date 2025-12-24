@@ -375,12 +375,11 @@ function closeImageModal() {
     }
 }
 
-// バグ: Escキーでモーダルを閉じる機能がコメントアウトされている
-// document.addEventListener('keydown', (e) => {
-//     if (e.key === 'Escape') {
-//         closeImageModal();
-//     }
-// });
+ バグ: Escキーでモーダルを閉じる機能がコメントアウトされている
+ document.addEventListener('keydown', (e) => {
+     if (e.key === 'Escape') {
+         closeImageModal();
+     }
+ });
 
-// ページ読み込み時に実行
 window.addEventListener('load', loadSpotDetails);
